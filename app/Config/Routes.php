@@ -64,6 +64,8 @@ $routes->post('/menu/tambah/(:any)/(:any)', 'Admin\CMenu::tambah/$1/$2', ['filte
 $routes->post('/menu/edit/(:any)/(:any)', 'Admin\CMenu::rubah/$1/$2', ['filter' => 'role:admin']);
 $routes->post('/menu/hapus/(:any)/(:any)', 'Admin\CMenu::hapus/$1/$2', ['filter' => 'role:admin']);
 $routes->get('/menu/json/', 'Admin\CMenu::JSONMenu', ['filter' => 'role:admin']);
+
+$routes->post('/penjualan/Transaksi', 'Transaksi::index');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
