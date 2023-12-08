@@ -112,76 +112,80 @@
                 <!-- Modal Edit  -->
                 <div class="modal fade" id="ModalEdit<?php echo $DataMenuv['id_menu']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg" role="document">
-                    <div class="card card-primary">
-                      <div class="card-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Data Siswa</h5>
-                      </div>
-                      <div class="modal-body">
-                        <form action="<?php echo base_url('index.php/menu/edit/' . $menuAktip . "/" . $moduleAktip) ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                          <?= csrf_field() ?>
-                          <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon3">id_menu</span>
-                            <input name="id_menu" type="text" class="form-control" id="recipient-name" value="<?php echo $DataMenuv['id_menu']; ?>">
-                          </div>
-                          <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon3">Module</span>
-                            <select name=id_module class="form-control">
-                              <?php
-                              foreach (listmodule() as $DataModulek => $DataModules) {
-                                if ($DataModules['id_module'] == $DataModules['nama_module']) {
-                                  $selected = "selected";
-                                } else {
-                                  $selected = "";
-                                }
-                              ?>
-                                <option value="<?= $DataMenuv['id_module'] ?>" <?= $selected ?>><?= $DataModules['nama_module'] ?></option>
-                              <?php } ?>
-                            </select>
-                          </div>
-                          <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon3">Nama Menu</span>
-                            <input name="menu" type="text" class="form-control" id="recipient-name" value="<?php echo $DataMenuv['menu']; ?>">
-                          </div>
-                          <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon3">Path</span>
-                            <input name="path" type="text" class="form-control" id="recipient-name" value="<?php echo $DataMenuv['path']; ?>">
-                          </div>
-                          <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon3">icon</span>
-                            <input name="icon" type="text" class="form-control" id="recipient-name" value="<?php echo $DataMenuv['icon']; ?>">
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button class="btn btn-primary"><i class="fas fa-save"> Save</i></button>
-                          </div>
-                        </form>
-                      </div>
+                    <div class="modal-content">
+                      <div class="card card-primary">
+                        <div class="card-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Data Menu</h5>
+                        </div>
+                        <div class="modal-body">
+                          <form action="<?php echo base_url('index.php/menu/edit/' . $menuAktip . "/" . $moduleAktip) ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                            <?= csrf_field() ?>
+                            <div class="input-group mb-3">
+                              <span class="input-group-text" id="basic-addon3">id_menu</span>
+                              <input name="id_menu" type="text" class="form-control" id="recipient-name" value="<?php echo $DataMenuv['id_menu']; ?>">
+                            </div>
+                            <div class="input-group mb-3">
+                              <span class="input-group-text" id="basic-addon3">Module</span>
+                              <select name=id_module class="form-control">
+                                <?php
+                                foreach (listmodule() as $DataModulek => $DataModules) {
+                                  if ($DataModules['id_module'] == $DataModules['nama_module']) {
+                                    $selected = "selected";
+                                  } else {
+                                    $selected = "";
+                                  }
+                                ?>
+                                  <option value="<?= $DataMenuv['id_module'] ?>" <?= $selected ?>><?= $DataModules['nama_module'] ?></option>
+                                <?php } ?>
+                              </select>
+                            </div>
+                            <div class="input-group mb-3">
+                              <span class="input-group-text" id="basic-addon3">Nama Menu</span>
+                              <input name="menu" type="text" class="form-control" id="recipient-name" value="<?php echo $DataMenuv['menu']; ?>">
+                            </div>
+                            <div class="input-group mb-3">
+                              <span class="input-group-text" id="basic-addon3">Path</span>
+                              <input name="path" type="text" class="form-control" id="recipient-name" value="<?php echo $DataMenuv['path']; ?>">
+                            </div>
+                            <div class="input-group mb-3">
+                              <span class="input-group-text" id="basic-addon3">icon</span>
+                              <input name="icon" type="text" class="form-control" id="recipient-name" value="<?php echo $DataMenuv['icon']; ?>">
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button class="btn btn-primary"><i class="fas fa-save"> Save</i></button>
+                            </div>
+                          </form>
+                        </div>
 
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <div class="modal fade" id="ModalDelete<?php echo $DataMenuv['id_menu']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg" role="document">
-                    <div class="card card-danger">
-                      <div class="card-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Data Menu</h5>
+                    <div class="modal-content">
+                      <div class="card card-danger">
+                        <div class="card-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Data Menu</h5>
+                        </div>
+                        <div class="modal-body danger">
+                          <form action="<?php echo base_url('index.php/menu/delete/' . $menuAktip . "/" . $moduleAktip) ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+
+                            <div class="input-group mb-3">
+                              <span class="input-group-text" id="basic-addon3">id_menu</span>
+                              <input name="id_menu" type="text" class="form-control" id="recipient-name" value="<?php echo $DataMenuv['id_menu']; ?>">
+                            </div>
+
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button class="btn btn-danger"><i class="fas fa-trash"> Delete</i></button>
+                            </div>
+                          </form>
+                        </div>
+
                       </div>
-                      <div class="modal-body danger">
-                        <form action="<?php echo base_url('index.php/menu/delete/' . $menuAktip . "/" . $moduleAktip) ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-
-                          <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon3">id_menu</span>
-                            <input name="id_menu" type="text" class="form-control" id="recipient-name" value="<?php echo $DataMenuv['id_menu']; ?>">
-                          </div>
-
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button class="btn btn-danger"><i class="fas fa-trash"> Delete</i></button>
-                          </div>
-                        </form>
-                      </div>
-
                     </div>
                   </div>
                 </div>
@@ -302,7 +306,7 @@
           'data': null,
           'title': 'command',
           render: function(data, type, row, meta) {
-            return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalEdit' + data['id_menu'] + '"><i class="fas fa-pencil-alt" title="Edit Data"></i></button>' +
+            return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalEdit' + data['id_menu'] + '"><i class="fas fa-pencil-alt" title="Edit Data"></i></button>&nbsp;&nbsp;&nbsp;' +
               '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalDelete' + data['id_menu'] + '"><i class="fas fa-trash" title="Delete Data"></i></button>'
           }
         }

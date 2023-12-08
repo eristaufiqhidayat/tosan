@@ -65,7 +65,8 @@ $routes->post('/menu/edit/(:any)/(:any)', 'Admin\CMenu::rubah/$1/$2', ['filter' 
 $routes->post('/menu/hapus/(:any)/(:any)', 'Admin\CMenu::hapus/$1/$2', ['filter' => 'role:admin']);
 $routes->get('/menu/json/', 'Admin\CMenu::JSONMenu', ['filter' => 'role:admin']);
 
-$routes->post('/penjualan/Transaksi', 'Transaksi::index');
+$routes->get('/Penjualan/Transaksi/(:any)/(:any)', 'Penjualan\Transaksi::index/$1/$2');
+$routes->post('/Penjualan/jsonbarcode/Transaksi/', 'Penjualan\Transaksi::jsonbarcode');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

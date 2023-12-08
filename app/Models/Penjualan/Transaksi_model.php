@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+//defined('BASEPATH') or exit('No direct script access allowed');
 
 namespace App\Models\Penjualan;
 
@@ -16,6 +16,7 @@ class Transaksi_model extends Model
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
 	protected $allowedFields    = ['id', 'tanggal', 'barcode', 'qty', 'total_bayar', 'jumlah_uang', 'diskon', 'pelanggan', 'nota', 'kasir'];
+
 	public function removeStok($id, $stok)
 	{
 		$this->where('id', $id);

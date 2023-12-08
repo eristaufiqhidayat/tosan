@@ -1,6 +1,13 @@
 <?php
 //defined('BASEPATH') OR exit('No direct script access allowed');
+
+namespace App\Controllers\Penjualan;
+
 use App\Controllers\BaseController;
+use \DateTime;
+use App\Models\MMenu;
+use App\Models\Penjualan\Transaksi_model;
+use App\Models\Penjualan\MProdukmodel;
 
 class Transaksi extends BaseController
 {
@@ -8,15 +15,27 @@ class Transaksi extends BaseController
 	public function __construct()
 	{
 		//parent::__construct();
-		if ($this->session->userdata('status') !== 'login') {
-			redirect('/');
-		}
-		$this->load->model('transaksi_model');
+		//if ($this->session->userdata('status') !== 'login') {
+		//	redirect('/');
+		//}
+		//$this->load->model('transaksi_model');
 	}
 
-	public function index()
+	public function index($menuAktip = '', $moduleAktip = '')
 	{
-		$this->load->view('Penjualan/transaksi');
+		helper('text');
+		$menu = new MMenu();
+		$datamenu = $menu->listing();
+		$model = new Transaksi_model();
+		//$datamenu2 = $model->read();
+		$data = array(
+			'title'        => 'Transaksi',
+			//'DataMenu'    => $datamenu2,
+			'menu'   =>  $datamenu,
+			'menuAktip' => $menuAktip,
+			'moduleAktip' => $moduleAktip
+		);
+		return view('Penjualan/transaksi', $data);
 	}
 
 	public function read()
@@ -139,6 +158,20 @@ class Transaksi extends BaseController
 			$total = explode(',', $key);
 		}
 		echo json_encode($total);
+	}
+	public function jsonbarcode()
+	{
+		// $auth = service('authentication');
+		// if (!$auth->check()) {
+		// 	$this->session->set('redirect_url', current_url());
+		// 	return redirect()->route('login');
+		// }
+		$model = new MProdukmodel();
+		$dataModel = $model->getNama($this->request->getvar('id'));
+		$data = array(
+			'DataModule'    => $dataModel,
+		);
+		return $this->response->setJSON($data);
 	}
 }
 
