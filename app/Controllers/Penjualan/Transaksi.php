@@ -66,29 +66,40 @@ class Transaksi extends BaseController
 
 	public function add()
 	{
-		$produk = json_decode($this->input->post('produk'));
-		$tanggal = new DateTime($this->input->post('tanggal'));
+
+		$modelproduk = new MProdukmodel();
+		$modeltransaksi = new Transaksi_model();
+		$produk = json_encode($this->request->getGetPost('produk'));
+		$produkd = json_decode($produk);
+		//var_dump($this->request->getGetPost('produk'));
+		//$tanggal = new DateTime($this->input->post('tanggal'));
+		//$tanggal = new DateTime(now());
 		$barcode = array();
-		foreach ($produk as $produk) {
-			$this->transaksi_model->removeStok($produk->id, $produk->stok);
-			$this->transaksi_model->addTerjual($produk->id, $produk->terjual);
+		foreach ($produkd as $produk) {
+			//$this->transaksi_model->removeStok($produk->id, $produk->stok);
+			//$this->transaksi_model->addTerjual($produk->id, $produk->terjual);
+			$modelproduk->removeStok($produk->id, $produk->stok);
+			$modelproduk->addTerjual($produk->id, $produk->terjual);
 			array_push($barcode, $produk->id);
 		}
 		$data = array(
-			'tanggal' => $tanggal->format('Y-m-d H:i:s'),
+			'tanggal' => date('Y-m-d H:i:s'),
 			'barcode' => implode(',', $barcode),
-			'qty' => implode(',', $this->input->post('qty')),
-			'total_bayar' => $this->input->post('total_bayar'),
-			'jumlah_uang' => $this->input->post('jumlah_uang'),
-			'diskon' => $this->input->post('diskon'),
-			'pelanggan' => $this->input->post('pelanggan'),
-			'nota' => $this->input->post('nota'),
-			'kasir' => $this->session->userdata('id')
+			'qty' => implode(',', $this->request->getGetPost('qty')),
+			'total_bayar' => $this->request->getGetPost('total_bayar'),
+			'jumlah_uang' => $this->request->getGetPost('jumlah_uang'),
+			'diskon' => $this->request->getGetPost('diskon'),
+			'pelanggan' => $this->request->getGetPost('pelanggan'),
+			'nota' => $this->request->getGetPost('nota'),
+			'kasir' => user()->id
 		);
-		if ($this->transaksi_model->create($data)) {
-			echo json_encode($this->db->insert_id());
+		//var_dump($data);
+		//echo json_encode($this->request->getGetPost('produk'));
+		if ($modeltransaksi->create($data)) {
+			// 	echo json_encode($this->db->insert_id());
+			echo json_encode($this->request->getGetPost('produk'));
 		}
-		$data = $this->input->post('form');
+		//$data = $this->input->post('form');
 	}
 
 	public function delete()
@@ -167,11 +178,30 @@ class Transaksi extends BaseController
 		// 	return redirect()->route('login');
 		// }
 		$model = new MProdukmodel();
-		$dataModel = $model->getNama($this->request->getvar('id'));
-		$data = array(
-			'DataModule'    => $dataModel,
-		);
-		return $this->response->setJSON($data);
+		$dataModel = $model->getBarcode($this->request->getGetPost('barcode'));
+		return $this->response->setJSON($dataModel);
+	}
+	public function jsongetnamaproduk()
+	{
+		// $auth = service('authentication');
+		// if (!$auth->check()) {
+		// 	$this->session->set('redirect_url', current_url());
+		// 	return redirect()->route('login');
+		// }
+		$model = new MProdukmodel();
+		$dataModel = $model->getNamaProduk($this->request->getGetPost('id'));
+		return $this->response->setJSON($dataModel);
+	}
+	public function jsongetstok()
+	{
+		// $auth = service('authentication');
+		// if (!$auth->check()) {
+		// 	$this->session->set('redirect_url', current_url());
+		// 	return redirect()->route('login');
+		// }
+		$model = new MProdukmodel();
+		$dataModel = $model->getStok($this->request->getGetPost('id'));
+		return $this->response->setJSON($dataModel);
 	}
 }
 

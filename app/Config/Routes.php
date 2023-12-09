@@ -66,7 +66,11 @@ $routes->post('/menu/hapus/(:any)/(:any)', 'Admin\CMenu::hapus/$1/$2', ['filter'
 $routes->get('/menu/json/', 'Admin\CMenu::JSONMenu', ['filter' => 'role:admin']);
 
 $routes->get('/Penjualan/Transaksi/(:any)/(:any)', 'Penjualan\Transaksi::index/$1/$2');
-$routes->post('/Penjualan/jsonbarcode/Transaksi/', 'Penjualan\Transaksi::jsonbarcode');
+$routes->get('/Penjualan/jsonbarcode/Transaksi/', 'Penjualan\Transaksi::jsonbarcode');
+$routes->get('/Penjualan/jsonnamaproduk/Transaksi/', 'Penjualan\Transaksi::jsongetnamaproduk');
+$routes->get('/Penjualan/jsongetstok/Transaksi/', 'Penjualan\Transaksi::jsongetstok');
+$routes->get('/Penjualan/jsonadd/Transaksi/', 'Penjualan\Transaksi::add');
+$routes->get('/Pelanggan/jsonsearch/', 'Penjualan\Pelanggan::search');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

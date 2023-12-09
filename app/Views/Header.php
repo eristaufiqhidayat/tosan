@@ -35,9 +35,9 @@
 
 <body class="sidebar-mini layout-fixed">
 
-  <div class="preloader flex-column justify-content-center align-items-center">
+  <!-- <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="<?php echo BPATH; ?>/asset/dist/img/jampasir.gif" alt="lembah arafah" height="60" width="60">
-  </div>
+  </div> -->
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-dark navbar-light">
     <!-- Left navbar links -->

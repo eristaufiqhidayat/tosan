@@ -17,23 +17,10 @@ class Transaksi_model extends Model
 	protected $protectFields    = true;
 	protected $allowedFields    = ['id', 'tanggal', 'barcode', 'qty', 'total_bayar', 'jumlah_uang', 'diskon', 'pelanggan', 'nota', 'kasir'];
 
-	public function removeStok($id, $stok)
-	{
-		$this->where('id', $id);
-		$this->set('stok', $stok);
-		return $this->update('produk');
-	}
-
-	public function addTerjual($id, $jumlah)
-	{
-		$this->where('id', $id);
-		$this->set('terjual', $jumlah);
-		return $this->update('produk');;
-	}
 
 	public function create($data)
 	{
-		return $this->insert($this->table, $data);
+		return $this->insert($data);
 	}
 
 	public function read()

@@ -49,7 +49,7 @@
                 <div class="form-group">
                   <label>Barcode</label>
                   <div class="form-inline">
-                    <select id="barcode" class="form-control select2 col-sm-6" onchange="getNama()"></select>
+                    <select id="barcode" class="form-control select2 col-sm-9" onchange="getNama()"></select>
                     <span class="ml-3 text-muted" id="nama_produk"></span>
                   </div>
                   <small class="form-text text-muted" id="sisa"></small>
@@ -203,11 +203,11 @@
 <script src="<?php echo BPATH; ?>/asset/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script src="<?php echo BPATH; ?>/asset/plugins/moment/moment.min.js"></script>
 <script>
-  var produkGetNamaUrl = '<?php echo site_url('Penjualan/jsonbarcode/Transaksi') ?>';
-  // var produkGetStokUrl = '<?php echo site_url('produk/get_stok') ?>';
-  // var addUrl = '<?php echo site_url('transaksi/add') ?>';
+  var produkGetNamaUrl = '<?php echo site_url('Penjualan/jsonnamaproduk/Transaksi') ?>';
+  var produkGetStokUrl = '<?php echo site_url('Penjualan/jsongetstok/Transaksi') ?>';
+  var addUrl = '<?php echo site_url('Penjualan/jsonadd/Transaksi') ?>';
   var getBarcodeUrl = '<?php echo site_url('Penjualan/jsonbarcode/Transaksi') ?>';
-  // var pelangganSearchUrl = '<?php echo site_url('pelanggan/search') ?>';
+  var pelangganSearchUrl = '<?php echo site_url('Pelanggan/jsonsearch') ?>';
   // var cetakUrl = '<?php echo site_url('transaksi/cetak/') ?>';
 </script>
 <script src="<?php echo BPATH; ?>/asset/js/unminify/transaksi.js"></script>

@@ -19,10 +19,10 @@ function nota(jumlah) {
     return hasil
 }
 
-function getNama() {
+function getNama() { 
     $.ajax({
         url: produkGetNamaUrl,
-        type: "post",
+        type: "get",
         dataType: "json",
         data: {
             id: $("#barcode").val()
@@ -42,7 +42,7 @@ function getNama() {
 function checkStok() {
     $.ajax({
         url: produkGetStokUrl,
-        type: "post",
+        type: "GET",
         dataType: "json",
         data: {
             id: $("#barcode").val()
@@ -137,26 +137,29 @@ function remove(nama) {
 }
 
 function add() {
-    let data = transaksi.rows().data(),
-        qty = [];
-    $.each(data, (index, value) => {
-        qty.push(value[3])
-    });
+    
+     let data = transaksi.rows().data();
+         qty = [];
+     $.each(data, (index, value) => {
+         qty.push(value[3])
+     });
     $.ajax({
         url: addUrl,
-        type: "post",
+        type: "get",
         dataType: "json",
         data: {
-            produk: JSON.stringify(produk),
-            tanggal: $("#tanggal").val(),
+            produk: produk,
+            //produk: JSON.stringify(produk),
             qty: qty,
+            tanggal: $("#tanggal").val(),
             total_bayar: $("#total").html(),
             jumlah_uang: $('[name="jumlah_uang"]').val(),
             diskon: $('[name="diskon"]').val(),
             pelanggan: $("#pelanggan").val(),
             nota: $("#nota").html()
         },
-        success: res => {
+        success: function (request, status, error) {
+            //alert("berhasil"+request.responseText);
             if (isCetak) {
                 Swal.fire("Sukses", "Sukses Membayar", "success").
                     then(() => window.location.href = `${cetakUrl}${res}`)
@@ -165,10 +168,15 @@ function add() {
                     then(() => window.location.reload())
             }
         },
-        error: err => {
-            console.log(err)
+        error: function (request, status, error) {
+            alert(request.responseText);
+            //alert($("#tanggal").val());
+            // Swal.fire("Sukses", "Sukses Membayar", "success").
+            //         then(() => window.location.reload())
         }
+         
     })
+    
 }
 
 function kembalian() {
@@ -178,13 +186,13 @@ function kembalian() {
     $(".kembalian").html(jumlah_uang - total - diskon);
     checkUang()
 }
-
+$("#nota").html(nota(15));
 $("#barcode").select2({
     
     placeholder: "Barcode Kasir",
     ajax: {
         url: getBarcodeUrl,
-        type: "post",
+        type: "GET",
         dataType: "json",
         data: params => ({
             barcode: params.term
@@ -195,11 +203,22 @@ $("#barcode").select2({
         cache: true
     }
 });
+$(".modal").on("hidden.bs.modal", () => {
+    $("#form")[0].reset();
+    $("#form").validate().resetForm()
+});
+$(".modal").on("show.bs.modal", () => {
+    let now = moment().format("D-MM-Y H:mm:ss"),
+        total = $("#total").html(),
+        jumlah_uang = $('[name="jumlah_uang"').val();
+        //alert(total);
+    $("#tanggal").val(now), $(".total_bayar").html(total), $(".kembalian").html(Math.max(jumlah_uang - total, 0))
+});
 $("#pelanggan").select2({
     placeholder: "Pelanggan",
     ajax: {
         url: pelangganSearchUrl,
-        type: "post",
+        type: "get",
         dataType: "json",
         data: params => ({
             pelanggan: params.term
@@ -210,18 +229,9 @@ $("#pelanggan").select2({
         cache: true
     }
 });
-$("#tanggal").datetimepicker({
-    format: "dd-mm-yyyy h:ii:ss"
-});
 $(".modal").on("hidden.bs.modal", () => {
     $("#form")[0].reset();
     $("#form").validate().resetForm()
-});
-$(".modal").on("show.bs.modal", () => {
-    let now = moment().format("D-MM-Y H:mm:ss"),
-        total = $("#total").html(),
-        jumlah_uang = $('[name="jumlah_uang"').val();
-    $("#tanggal").val(now), $(".total_bayar").html(total), $(".kembalian").html(Math.max(jumlah_uang - total, 0))
 });
 $("#form").validate({
     errorElement: "span",
@@ -232,4 +242,11 @@ $("#form").validate({
         add()
     }
 });
-$("#nota").html(nota(15));
+// $("#tanggal").datetimepicker({
+//     format: "dd-mm-yyyy h:ii:ss"
+// });
+// $(".modal").on("hidden.bs.modal", () => {
+//     $("#form")[0].reset();
+//     $("#form").validate().resetForm()
+// });
+
