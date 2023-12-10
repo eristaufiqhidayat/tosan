@@ -203,6 +203,28 @@ class Transaksi extends BaseController
 		$dataModel = $model->getStok($this->request->getGetPost('id'));
 		return $this->response->setJSON($dataModel);
 	}
+	public function jsonkategori()
+	{
+		// $auth = service('authentication');
+		// if (!$auth->check()) {
+		// 	$this->session->set('redirect_url', current_url());
+		// 	return redirect()->route('login');
+		// }
+		$model = new MProdukmodel();
+		$dataModel = $model->getKategori();
+		return $this->response->setJSON($dataModel);
+	}
+	public function jsonsatuan()
+	{
+		// $auth = service('authentication');
+		// if (!$auth->check()) {
+		// 	$this->session->set('redirect_url', current_url());
+		// 	return redirect()->route('login');
+		// }
+		$model = new MProdukmodel();
+		$dataModel = $model->getSatuan();
+		return $this->response->setJSON($dataModel);
+	}
 }
 
 /* End of file Transaksi.php */

@@ -71,6 +71,14 @@ $routes->get('/Penjualan/jsonnamaproduk/Transaksi/', 'Penjualan\Transaksi::jsong
 $routes->get('/Penjualan/jsongetstok/Transaksi/', 'Penjualan\Transaksi::jsongetstok');
 $routes->get('/Penjualan/jsonadd/Transaksi/', 'Penjualan\Transaksi::add');
 $routes->get('/Pelanggan/jsonsearch/', 'Penjualan\Pelanggan::search');
+
+$routes->get('/Produk/index/(:any)/(:any)', 'Produk\CProduk::index/$1/$2');
+$routes->get('/Produk/json/', 'Produk\CProduk::jsondata');
+$routes->post('/Produk/delete/', 'Produk\CProduk::delete');
+$routes->post('/Produk/edit/', 'Produk\CProduk::rubah');
+$routes->get('/Produk/get_produk/', 'Produk\CProduk::get_produk');
+$routes->post('/Produk/jsonkategori/', 'Penjualan\Transaksi::jsonkategori');
+$routes->post('/Produk/jsonsatuan/', 'Penjualan\Transaksi::jsonsatuan');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

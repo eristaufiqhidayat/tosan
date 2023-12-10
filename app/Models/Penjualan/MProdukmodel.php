@@ -23,6 +23,22 @@ class MProdukmodel extends Model
         $query = $db->query($query);
         return $query->getResultArray();
     }
+    public function getKategori()
+    {
+        $db = db_connect();
+        $query = "select id, concat(id,' || ',kategori) as text from kategori_produk";
+        //echo $query;
+        $query = $db->query($query);
+        return $query->getResultArray();
+    }
+    public function getSatuan()
+    {
+        $db = db_connect();
+        $query = "select id, concat(id,' || ',satuan) as text from satuan_produk";
+        //echo $query;
+        $query = $db->query($query);
+        return $query->getResultArray();
+    }
     public function getNamaProduk($id)
     {
         $db = db_connect();
