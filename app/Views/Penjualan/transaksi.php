@@ -201,7 +201,7 @@
 <script src="<?php echo BPATH; ?>/asset/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script src="<?php echo BPATH; ?>/asset/plugins/select2/js/select2.min.js"></script>
 <script src="<?php echo BPATH; ?>/asset/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script src="<?php echo base_url(); ?>asset/plugins/moment/moment.min.js"></script>
+<script src="<?php echo BPATH; ?>/asset/plugins/moment/moment.min.js"></script>
 <script>
   var produkGetNamaUrl = '<?php echo site_url('Penjualan/jsonnamaproduk/Transaksi') ?>';
   var produkGetStokUrl = '<?php echo site_url('Penjualan/jsongetstok/Transaksi') ?>';
