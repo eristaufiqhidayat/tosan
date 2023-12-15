@@ -79,6 +79,11 @@ $routes->post('/Produk/edit/', 'Produk\CProduk::rubah');
 $routes->get('/Produk/get_produk/', 'Produk\CProduk::get_produk');
 $routes->post('/Produk/jsonkategori/', 'Penjualan\Transaksi::jsonkategori');
 $routes->post('/Produk/jsonsatuan/', 'Penjualan\Transaksi::jsonsatuan');
+
+$routes->get('/Stokmasuk/index/(:any)/(:any)', 'Stok\CStokMasuk::index/$1/$2');
+$routes->get('/Stokmasuk/read/', 'Stok\CStokMasuk::read');
+$routes->get('/Stokkeluar/index/(:any)/(:any)', 'Stok\CStokKeluar::index/$1/$2');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
